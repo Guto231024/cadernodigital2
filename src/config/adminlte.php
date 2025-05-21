@@ -301,7 +301,7 @@ return [
     'menu' => [
         // Navbar items:
         ['text' => 'Alunos', 
-        'url' => 'alunos', 
+        'url' => '/aluno', 
         'icon' => 'fas fa-user-graduate'],
         [
             'text' => 'Cursos',
@@ -316,10 +316,6 @@ return [
         ['text' => 'Disciplinas', 
         'url' => 'disciplinas', 
         'icon' => 'fas fa-book'],
-
-        ['text' => 'Turmas', 
-        'url' => 'turmas', 
-        'icon' => 'fas fa-users'],
 
         ['text' => 'Notas', 
         'url' => '#', 
