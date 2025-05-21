@@ -61,8 +61,7 @@ class CursoController extends Controller
         $cur->dt_inicio = $dt_inicio;
         $cur->dt_final = $dt_final;
         $cur->save();
-        return view('cursos.index');
-
+        return redirect()->route('curso.index');
     }
 
     /**
@@ -105,7 +104,7 @@ class CursoController extends Controller
         $cur->dt_final = $dt_final;
         $cur->update();
         
-        return view('cursos.index');
+        return redirect()->route('curso.index');
     }
 
     /**
@@ -115,6 +114,6 @@ class CursoController extends Controller
     {
         $cur = Curso::find($id);
         $cur->delete();
-        return view('cursos.index');
+        return redirect()->route('curso.index');
     }
 }
