@@ -1,0 +1,9 @@
+
+# Database files
+db/ibtmp1
+db/cadernodigital/*.frm
+db/cadernodigital/*.ibd
+db/cadernodigital/*.MYD
+db/cadernodigital/*.MYI
+db/cadernodigital/*.opt
+db/cadernodigital/ib*

@@ -11,7 +11,7 @@
         <div class="card-header">
             <h3 class="card-title">Cadastro de Alunos</h3>
         </div>
-        <div class="card-body"s>
+        <div class="card-body">
             <div class="form-group">
 
                 @if (isset($edit->id))

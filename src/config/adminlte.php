@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Caderno</b>Digital',
-    'logo_img' => 'vendor/adminlte/dist/img/book.png',
+    'logo' => '<b>Universidade</b>Guto',
+    'logo_img' => 'vendor/adminlte/dist/img/ugt.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,11 +86,11 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/book.png',
+            'path' => 'vendor/adminlte/dist/img/ugt.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 80,
+            'height' => 80,
         ],
     ],
 
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/book.png',
+            'path' => 'vendor/adminlte/dist/img/ugt.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 80,
@@ -132,14 +132,19 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-
+    'user_menu' => true,
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
+    'use_profile_url' => true,
 
+        'profile_url' => 'profile', // ou o nome da sua rota de perfil
+    'profile_url' => function ($user) {
+        return route('profile', ['id' => $user->id]);
+    },
     /*
     |--------------------------------------------------------------------------
     | Layout
@@ -310,7 +315,7 @@ return [
         ],
 
         ['text' => 'Professores', 
-        'url' => '#', 
+        'url' => '/professor', 
         'icon' => 'fas fa-chalkboard-teacher'],
 
         ['text' => 'Disciplinas', 
