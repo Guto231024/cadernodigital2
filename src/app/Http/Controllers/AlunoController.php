@@ -102,7 +102,10 @@ class AlunoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $edit = Aluno::find($id); // Busca o aluno pelo id
+        $cursos = Curso::all(); // Pega todos os cursos do banco
+
+        return view('alunos.crud', compact('edit', 'cursos'));
     }
 
     /**
@@ -110,7 +113,38 @@ class AlunoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $nome = $request->post('nome');
+        $cpf = $request->post('cpf');
+        $dt_nascimento = $request->post('dt_nascimento');
+        $email = $request->post('email');
+        $telefone = $request->post('telefone');
+        $cep = $request->post('cep');
+        $logradouro = $request->post('logradouro');
+        $numero = $request->post('numero');
+        $bairro = $request->post('bairro');
+        $cidade = $request->post('cidade');
+        $complemento = $request->post('complemento');
+        $uf = $request->post('uf');
+        $curso_id = $request->post('curso_id');
+
+        // Atualiza os dados do aluno
+        Aluno::whereId($id)->update([
+            'nome' => $nome,
+            'cpf' => $cpf,
+            'dt_nascimento' => $dt_nascimento,
+            'email' => $email,
+            'telefone' => $telefone,
+            'cep' => $cep,
+            'logradouro' => $logradouro,
+            'numero' => $numero,
+            'bairro' => $bairro,
+            'cidade' => $cidade,
+            'complemento' => $complemento,
+            'uf' => $uf,
+            'curso_id' => $curso_id
+        ]);
+
+        return redirect()->route('aluno.index');
     }
 
     /**
@@ -118,7 +152,16 @@ class AlunoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Verifica se o aluno existe
+        $aluno = Aluno::find($id);
+        if (!$aluno) {
+            return redirect()->route('aluno.index')->with('error', 'Aluno não encontrado.');
+        }
+
+        // Deleta o aluno
+        $aluno->delete();
+
+        return redirect()->route('aluno.index')->with('success', 'Aluno deletado com sucesso.');
     }
      public function consultaCep(Request $request)
     {

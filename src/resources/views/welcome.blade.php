@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Uniguto')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Uniguto</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Antes de Começar Seus Estudos Faça um Login.</p>
 @stop
 
 @section('css')

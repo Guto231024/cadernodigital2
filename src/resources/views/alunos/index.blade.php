@@ -23,7 +23,7 @@
                 <thead>
                     <tr>
                         <th style="width: 5%">Id</th>
-                        <th style="width: 30%">Aluno</th>
+                        <th style="width: 20%">Aluno</th>
                         <th style="width: 20%">Email</th>
                         <th style="width: 20%">Telefone</th>
                         <th style="width: 20%">Curso</th>
