@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Caborn\Caborn;
+use App\Models\Professor;
+use App\Models\Curso;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
+use GuzzleHttp\Client;
 class ProfessorController extends Controller
 {
     /**
@@ -12,7 +18,7 @@ class ProfessorController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // Carrega os professores junto com o curso relacionado
+            // Carrega os professors junto com o curso relacionado
             $data = Professor::with('curso')->get();
 
             return DataTables::of($data)
@@ -40,7 +46,9 @@ class ProfessorController extends Controller
      */
     public function create()
     {
-        //
+    $cursos = Curso::all(); // Pega todos os cursos do banco
+
+    return view('professores.crud', compact('cursos'));
     }
 
     /**
@@ -48,7 +56,23 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nome = $request->post('nome');
+        $cpf = $request->post('cpf');
+        $dt_nascimento = $request->post('dt_nascimento');
+        $email = $request->post('email');
+        $telefone = $request->post('telefone');
+        $curso_id = $request->post('curso_id');
+
+        $edit = new Professor();
+
+        $edit->nome = $nome;
+        $edit->cpf = $cpf;
+        $edit->dt_nascimento = $dt_nascimento;
+        $edit->email = $email;
+        $edit->telefone = $telefone;
+        $edit->curso_id = $curso_id;
+        $edit->save();
+        return redirect()->route('professor.index');
     }
 
     /**
@@ -64,7 +88,10 @@ class ProfessorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $edit = Professor::find($id); // Busca o professor pelo id
+        $cursos = Curso::all(); // Pega todos os cursos do banco
+
+        return view('professores.crud', compact('edit', 'cursos'));
     }
 
     /**
@@ -72,7 +99,24 @@ class ProfessorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $nome = $request->post('nome');
+        $cpf = $request->post('cpf');
+        $dt_nascimento = $request->post('dt_nascimento');
+        $email = $request->post('email');
+        $telefone = $request->post('telefone');
+        $curso_id = $request->post('curso_id');
+
+        // Atualiza os dados do professor
+        Professor::whereId($id)->update([
+            'nome' => $nome,
+            'cpf' => $cpf,
+            'dt_nascimento' => $dt_nascimento,
+            'email' => $email,
+            'telefone' => $telefone,
+            'curso_id' => $curso_id
+        ]);
+
+        return redirect()->route('professor.index');
     }
 
     /**
@@ -80,6 +124,76 @@ class ProfessorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Verifica se o professor existe
+        $professor = Professor::find($id);
+        if (!$professor) {
+            return redirect()->route('professor.index')->with('error', 'Professor não encontrado.');
+        }
+
+        // Deleta o professor
+        $professor->delete();
+
+        return redirect()->route('professor.index')->with('success', 'Professor deletado com sucesso.');
+    }
+     public function consultaCep(Request $request)
+    {
+        // CONSUMO DE API USANDO O GET_FILE_CONTENTS
+        // $cep = $request->input('cep');
+        // $url = "https://viacep.com.br/ws/{$cep}/json/";
+
+        // $response = file_get_contents($url);
+
+        // return response()->json(json_decode($response));
+
+
+        // CONSUMO DE API USANDO O CURL
+        // $cep = $request->input('cep');
+        // $url = "https://viacep.com.br/ws/{$cep}/json/";
+    
+        // // Inicializa o cURL
+        // $ch = curl_init();
+    
+        // // Configurações do cURL
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Timeout de 10 segundos
+    
+        // // Executa a requisição
+        // $response = curl_exec($ch);
+    
+        // // Verifica se houve erro
+        // if (curl_errno($ch)) {
+        //     return response()->json(['error' => 'Erro ao consultar o CEP.'], 500);
+        // }
+    
+        // // Fecha o cURL
+        // curl_close($ch);
+
+        // // Retorna a resposta decodificada
+        // return response()->json(json_decode($response));
+
+        // CONSUMO DE API USANDO O GuzzleHttp
+
+        $cep = $request->input('cep');
+        $url = "https://viacep.com.br/ws/{$cep}/json/";
+    
+        // Inicializa o studente Guzzle
+        $client= new Client();
+    
+        try {
+            // Faz a requisição GET
+            $response = $client->request('GET', $url);
+    
+            // Verifica o status da resposta
+            if ($response->getStatusCode() === 200) {
+                $data = json_decode($response->getBody(), true); // Decodifica o JSON
+                return response()->json($data);
+            }
+    
+            return response()->json(['error' => 'Erro ao consultar o CEP.'], $response->getStatusCode());
+        } catch (\Exception $e) {
+            // Trata erros de requisição
+            return response()->json(['error' => 'Erro ao consultar o CEP: ' . $e->getMessage()], 500);
+        }
     }
 }

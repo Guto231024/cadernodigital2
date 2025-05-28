@@ -322,45 +322,45 @@ return [
         'url' => 'disciplinas', 
         'icon' => 'fas fa-book'],
 
-        ['text' => 'Notas', 
-        'url' => '#', 
-        'icon' => 'fas fa-file-alt'],
+        //['text' => 'Notas', 
+      //  'url' => '#', 
+        //'icon' => 'fas fa-file-alt'],
         [
             'text' => 'Caderno Digital',
             'icon' => 'far fa-address-book',
             'submenu' => [
                 [
                     'text' => 'Calendário',
-                    'url' => '#',
+                    'url' => '/calendario',
                     'icon' => 'far fa-calendar-alt',
                 ],
-                [
-                    'text' => 'Anotações',
-                    'url' => '#',
-                    'icon' => 'far fa-clipboard',
-                    'submenu' => [
-                        [
-                            'text' => 'Aulas Teoricas',
-                            'url' => '#',
-                            'icon' => 'far fa-file-alt',
-                        ],
-                        [
-                            'text' => 'Aulas Praticas',
-                            'url' => '#',
-                            'icon' => 'fas fa-user-graduate',
-                        ],
-                        [
-                            'text' => 'Trabalhos',
-                            'url' => '#',
-                            'icon' => 'fas fa-tasks',
-                        ],
-                        [
-                            'text' => 'Provas',
-                            'url' => '#',
-                            'icon' => 'far fa-clipboard',
-                        ]
-                    ],
-                ],
+                //[
+                    //'text' => 'Anotações',
+                    //'url' => '#',
+                    //'icon' => 'far fa-clipboard',
+                    //'submenu' => [
+                      //  [
+                        //    'text' => 'Aulas Teoricas',
+                          //  'url' => '#',
+                            //'icon' => 'far fa-file-alt',
+                        //],
+                       // [
+                       //     'text' => 'Aulas Praticas',
+                        //    'url' => '#',
+                       //     'icon' => 'fas fa-user-graduate',
+                       // ],
+                        //[
+                          //  'text' => 'Trabalhos',
+                          //  'url' => '#',
+                            //'icon' => 'fas fa-tasks',
+                       // ],
+                        //[
+                        //    'text' => 'Provas',
+                         //   'url' => '#',
+                          //  'icon' => 'far fa-clipboard',
+                     // ]
+                    //],
+                //],
             ],
         ],
     ],

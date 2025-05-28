@@ -25,7 +25,7 @@
                         <th style="width: 5%">Id</th>
                         <th style="width: 20%">Professor</th>
                         <th style="width: 20%">Telefone</th>
-                        <th style="width: 20%">Curso</th>
+                        <th style="width: 20%">Prof do Curso</th>
                         <th style="width: 10%">Ações</th>
                     </tr>
                 </thead>
